@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 
 class AddAssignmentController{
-static Future<void> addAssignment(String assignmentName,String uploadURL,String Description, String assignmentId,String fromDate,String toDate,BuildContext context) {
+static Future<void> addAssignment(String assignmentName,String uploadURL,String Description, String assignmentId,DateTime fromDate,DateTime toDate,BuildContext context) {
   CollectionReference users = FirebaseFirestore.instance.collection('Assignments');
   return users
       .add({

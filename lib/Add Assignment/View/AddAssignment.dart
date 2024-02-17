@@ -17,9 +17,25 @@ class _AddAssignmentState extends State<AddAssignment> {
   TextEditingController assignmentName = TextEditingController();
   TextEditingController assignmentId = TextEditingController();
   TextEditingController Descreption = TextEditingController();
-  TextEditingController fromDate = TextEditingController();
-  TextEditingController endDate = TextEditingController();
   TextEditingController UploadURL = TextEditingController();
+  DateTime FromDate = DateTime.now();
+  DateTime ToDate = DateTime.now();
+
+  var projectimage;
+  Future<void> _selectDate(BuildContext context,DateTime initialDate) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != initialDate) {
+      setState(() {
+        initialDate = picked;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -85,15 +101,23 @@ class _AddAssignmentState extends State<AddAssignment> {
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 1,textController: fromDate, hintText: "From Date",onsecuretext: false,readOnly: false,onChanged: (){
-        
-                            },)),
+                            child:  Container(
+                              width: responsivedropdownSize,
+                              padding: EdgeInsets.only(left: 30),
+                              child:  ElevatedButton(
+                                onPressed: () => _selectDate(context,FromDate),
+                                child: Text("${FromDate.day.toString()}/${FromDate.month.toString()}/${FromDate.year.toString()}"),
+                              ),),),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 1,textController: endDate, hintText: "End Date",onsecuretext: false,readOnly: false,onChanged: (){
-        
-                            },)),
+                            child:  Container(
+                              width: responsivedropdownSize,
+                              padding: EdgeInsets.only(left: 30),
+                              child:  ElevatedButton(
+                                onPressed: () => _selectDate(context,ToDate),
+                                child: Text("${ToDate.day.toString()}/${ToDate.month.toString()}/${ToDate.year.toString()}"),
+                              ),),),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
@@ -110,13 +134,11 @@ class _AddAssignmentState extends State<AddAssignment> {
                            assignmentName.clear();
                            assignmentId.clear();
                            Descreption.clear();
-                          fromDate.clear();
-                          endDate.clear();
                          UploadURL.clear();
                         },),
                         SizedBox(width: 20,),
                         NeumorphicRoundedButton(buttonText: "ADD",textColor: Colors.white,borderRadius: 30,onTap: (){
-        AddAssignmentController.addAssignment(assignmentName.text,UploadURL.text,Descreption.text,assignmentId.text,fromDate.text,endDate.text,context);
+        AddAssignmentController.addAssignment(assignmentName.text,UploadURL.text,Descreption.text,assignmentId.text,FromDate,ToDate,context);
                         },),
                       ],
                     )

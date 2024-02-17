@@ -33,41 +33,54 @@ class _AssignmentState extends State<Assignment> {
         child: AppBar(),
       ),
       drawer: MyDrawer(),
-      body: FutureBuilder<List<DocumentSnapshot>>(
-        future: data,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            List<DocumentSnapshot>? documents = snapshot.data;
+      body: LayoutBuilder(
+          builder: (context, constraints) {
+            // Calculate a responsive factor based on screen width
+            double responsiveFactor = constraints.maxWidth / 600.0;
 
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount:screenWidth>800? 5:2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: documents!.length,
-              itemBuilder: (context, index) {
-                // Customize this widget based on your data structure
-                return GridItemWidget(
-                assignemntname: documents[index].get('assignmentName'),
-                description: documents[index].get('discription'),
-                index:index,
-                collection: "Assignments",
-                // Add more fields as needed
-                );
+            // Define the base icon size
+            double baseIconSize = 15.0;
+            double basedropdownSize = 200.0;
+            // Calculate the responsive icon size
+            double responsiveIconSize = baseIconSize * responsiveFactor;
+            double responsivedropdownSize = basedropdownSize * responsiveFactor;
+
+            return FutureBuilder<List<DocumentSnapshot>>(
+              future: data,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                } else {
+                  List<DocumentSnapshot>? documents = snapshot.data;
+
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:screenWidth>800? 5:2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                    itemCount: documents!.length,
+                    itemBuilder: (context, index) {
+                      // Customize this widget based on your data structure
+                      return GridItemWidget(
+                        assignemntname: documents[index].get('assignmentName'),
+                        description: documents[index].get('discription'),
+                        index:index,
+                        collection: "Assignments",
+                        // Add more fields as needed
+                      );
+                    },
+                  );
+                }
               },
             );
-          }
-        },
-      ),
+          }),
     );
   }
 }
