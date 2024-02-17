@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hiddenlampadmin/Auth/Controller/LoginController.dart';
 
 import '../../Dashboard/View/Dashboard.dart';
 import '../../Widgets/CustomButton.dart';
@@ -20,7 +21,13 @@ class _LoginState extends State<Login> {
    var screenHeight = MediaQuery.of(context).size.height;
     return  Scaffold(
       appBar:  AppBar(
-        title:  Text("Login",style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),),
+        title:  Container(
+          height: 100,
+          width: 110,
+          child: Image.asset(
+            'hiddenlampicon.png',
+          ),
+        ),
 
 
       ),
@@ -33,7 +40,7 @@ class _LoginState extends State<Login> {
 
                   child: Padding(
                       padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-                      child: CustomTextInput(maxLines: 1,textController: username, hintText: "Email",readOnly: false,onChanged: (){
+                      child: CustomTextInput(maxLines: 1,textController: username, hintText: "Email",onsecuretext: false,readOnly: false,onChanged: (){
 
                       },)))),
           Padding(
@@ -42,7 +49,7 @@ class _LoginState extends State<Login> {
 
                   child: Padding(
                       padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-                      child:CustomTextInput(maxLines: 1,textController: password, hintText: "Password",readOnly: false,onChanged: (){
+                      child:CustomTextInput(maxLines: 1,textController: password, hintText: "Password",onsecuretext: true,readOnly: false,onChanged: (){
 
                       },)))),
           Padding(
@@ -53,7 +60,8 @@ width: 250,
                   child: Padding(
                       padding: EdgeInsets.only(left: 50, right: 15, top: 5),
                       child: NeumorphicRoundedButton(buttonText: "Login",borderRadius: 20.0,textColor: Colors.white,onTap: (){
-Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard()));
+LoginController.Login(username.text,password.text,context);
+
                       },)))),
         ],
       )

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hiddenlampadmin/Dashboard/View/Dashboard.dart';
+import 'package:hiddenlampadmin/Notification/View/Notification.dart';
 import 'package:hiddenlampadmin/Widgets/welcometext.dart';
 
+import '../ContactUs/View/ContactUs.dart';
+import '../Profile/View/Profile.dart';
 import 'PrimaryContainer.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -14,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
       leading: Stack(
 
         children: [
-         screenWidth <1200?SizedBox(): ResponsiveSearchBox(),
+         // screenWidth <1200?SizedBox(): ResponsiveSearchBox(),
           GestureDetector(
             onTap: (){
               Scaffold.of(context).openDrawer();
@@ -23,7 +27,9 @@ class CustomAppBar extends StatelessWidget {
                 padding: EdgeInsets.only(left:20 ,top: 20),
                 child: Icon(Icons.menu,size: 30,)),
           ),
-          GestureDetector(
+          GestureDetector(onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard()));
+          },
 
             child: Container(
               padding: EdgeInsets.only(left: 60,top: 10),
@@ -38,20 +44,35 @@ class CustomAppBar extends StatelessWidget {
                Container(
                    padding: EdgeInsets.only(right:20 ,top: 10),
                    child: AnimatedWelcomeText()),
-               Container(
-                   padding: EdgeInsets.only(right:20,top: 10 ),
-                   child: Icon(Icons.mail,size: 20,)),
-               Container(
+               GestureDetector(
+                 onTap: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => ContactUs()));
+                 },
+                 child: Container(
+                     padding: EdgeInsets.only(right:20,top: 10 ),
+                     child: Icon(Icons.mail,size: 20,)),
+               ),
+               GestureDetector(
+                 onTap: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
+                 },
+                 child: Container(
+                     padding: EdgeInsets.only(right: 20,top: 10),
+                     child: Icon(Icons.notifications_active,size: 20,)),
+               ),
+               GestureDetector(
+                 onTap: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+                 },
+                 child: Container(
                    padding: EdgeInsets.only(right: 20,top: 10),
-                   child: Icon(Icons.notifications_active,size: 20,)),
-               Container(
-                 padding: EdgeInsets.only(right: 20,top: 10),
-                 child: const CircleAvatar(
-                   backgroundColor: Color(0xffE6E6E6),
-                   radius: 30,
-                   child: Icon(
-                     Icons.person,
-                     color: Color(0xffCCCCCC),
+                   child: const CircleAvatar(
+                     backgroundColor: Color(0xffE6E6E6),
+                     radius: 30,
+                     child: Icon(
+                       Icons.person,
+                       color: Color(0xffCCCCCC),
+                     ),
                    ),
                  ),
                ),

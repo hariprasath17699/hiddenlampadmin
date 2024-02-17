@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hiddenlampadmin/Add%20Assignment/View/AddAssignment.dart';
+import 'package:hiddenlampadmin/Add%20Reels/View/AddReels.dart';
 
+import '../../AddProject/View/AddProject.dart';
 import '../../Assignment/View/Assignment.dart';
+import '../../Queries/View/Queries.dart';
 import '../../StudentDetails/View/StudentDetails.dart';
+import '../../UnlockCourses/View/UnlockCourses.dart';
 import '../../Widgets/Appbar.dart';
 import '../../Widgets/Drawer.dart';
 import '../../Widgets/TextIcon.dart';
@@ -28,117 +33,121 @@ class _DashboardState extends State<Dashboard> {
       ),
 drawer: MyDrawer(),
 
-    body:  LayoutBuilder(
-    builder: (context, constraints) {
-    // Calculate a responsive factor based on screen width
-    double responsiveFactor = constraints.maxWidth / 400.0;
-
-    // Define the base icon size
-    double baseIconSize = 50.0;
-    double textSize = 10.0;
-    // Calculate the responsive icon size
-    double responsiveIconSize = baseIconSize * responsiveFactor;
-    double responsivetextSize = textSize * responsiveFactor;
-    return Center(
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-
-
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Assignment()));
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "assignment.png",
-                  text: 'Assignment',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
+    body:  SingleChildScrollView(
+      child: LayoutBuilder(
+      builder: (context, constraints) {
+      // Calculate a responsive factor based on screen width
+      double responsiveFactor = constraints.maxWidth / 400.0;
+      
+      // Define the base icon size
+      double baseIconSize = 50.0;
+      double textSize = 10.0;
+      // Calculate the responsive icon size
+      double responsiveIconSize = baseIconSize * responsiveFactor;
+      double responsivetextSize = textSize * responsiveFactor;
+      return Center(
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      
+      SizedBox(height: 170,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddAssignment()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "assignment.png",
+                    text: 'Assignment',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
+                    )),
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDetails()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "student.png",
+                    text: 'Student Details',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
                   )),
-          ),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => StudentDetails()));
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "student.png",
-                  text: 'Student Details',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
-                )),
-          ),
-          GestureDetector(
-            onTap: (){
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddProject()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "idea.png",
+                    text: 'Projects',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
+                  )),
+            ),
+      
+          ],
+        ),
+        SizedBox(height: 100,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UnlockCourses()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "social.png",
+                    text: 'Unlock Courses',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
+                  )),
+            ),
+            GestureDetector(
+              onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>AddReels()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "reel.png",
+                    text: 'Reels',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
+                  )),
+            ),
+            GestureDetector(
+              onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>Queries()));
+              },
+              child: Container(
+                  child: TextIcon(
+                    icon: "query.png",
+                    text: 'Queries',
+                    iconSize: responsiveIconSize,
+                    textSize: responsivetextSize,
+                    color: Colors.grey,
+                  )),
+            ),
+          ],
+        ),
+        SizedBox(height: 100,)
+      ],
 
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "idea.png",
-                  text: 'Projects',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
-                )),
-          ),
-
-        ],
       ),
-      SizedBox(height: 100,),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: (){
-
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "social.png",
-                  text: 'Unlock Courses',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
-                )),
-          ),
-          GestureDetector(
-            onTap: (){
-
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "reel.png",
-                  text: 'Reels',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
-                )),
-          ),
-          GestureDetector(
-            onTap: (){
-
-            },
-            child: Container(
-                child: TextIcon(
-                  icon: "query.png",
-                  text: 'Queries',
-                  iconSize: responsiveIconSize,
-                  textSize: responsivetextSize,
-                  color: Colors.grey,
-                )),
-          ),
-        ],
-      ),
-    ],
-    ),
-    );
-  }));
+      );
+        }),
+    ));
 
 
   }

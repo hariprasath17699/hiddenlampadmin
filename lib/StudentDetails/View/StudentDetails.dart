@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hiddenlampadmin/StudentDetails/Controller/AddStudentDetailsController.dart';
 
 import '../../Widgets/Appbar.dart';
 import '../../Widgets/CustomButton.dart';
@@ -14,12 +15,12 @@ class StudentDetails extends StatefulWidget {
 
 class _StudentDetailsState extends State<StudentDetails> {
   TextEditingController name = TextEditingController();
-  List<String> classoptions = <String>['12', '11', '10', '9'];
-  String classdropdownValue = '9';
-  List<String> sectionoptions = <String>['A', 'B', 'C', 'D'];
-  String sectiondropdownValue = 'A';
-  List<String> schooloptions = <String>['GKD', 'GSR', 'RNR', 'STT'];
-  String schooldropdownValue = 'GSR';
+  List<String> classoptions = <String>['Please select class','12', '11', '10', '9'];
+  String classdropdownValue = 'Please select class';
+  List<String> sectionoptions = <String>['Please select section','A', 'B', 'C', 'D'];
+  String sectiondropdownValue = 'Please select section';
+  List<String> schooloptions = <String>['Please select school','GKD', 'GSR', 'RNR', 'STT'];
+  String schooldropdownValue = 'Please select school';
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -164,6 +165,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                  ),
                   SizedBox(height: 50,),
                   NeumorphicRoundedButton(buttonText: "Save",textColor: Colors.white,borderRadius: 10.0,onTap: (){
+                 AddStudentDetailsController.addStudentDetails(classdropdownValue, sectiondropdownValue, sectiondropdownValue,context);
                   }),  ],
               ),
 

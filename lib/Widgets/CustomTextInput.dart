@@ -5,8 +5,9 @@ class CustomTextInput extends StatelessWidget {
   final String hintText;
   final int maxLines;
   final bool readOnly;
+  final bool onsecuretext;
   final Function onChanged;
-  const CustomTextInput({required this.textController, required this.hintText,required this.maxLines,required this.readOnly,required this.onChanged, Key? key}) : super(key: key);
+  const CustomTextInput({required this.textController, required this.hintText,required this.maxLines,required this.readOnly,required this.onChanged,required this.onsecuretext, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class CustomTextInput extends StatelessWidget {
         controller: textController,
        maxLines: maxLines,
         readOnly: readOnly,
+        obscureText: onsecuretext,
         onChanged: (value) {
           //Do something wi
           onChanged;
