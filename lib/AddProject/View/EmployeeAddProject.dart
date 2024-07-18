@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hiddenlampadmin/AddProject/Controller/AddProjectController.dart';
+import 'package:hiddenlampadmin/EmployeeAppBar.dart';
+import 'package:hiddenlampadmin/EmployeeDrawer.dart';
 import 'package:hiddenlampadmin/Widgets/projectUploadImage.dart';
 import '../../Dashboard/View/Dashboard.dart';
 import '../../Widgets/Appbar.dart';
@@ -9,14 +11,14 @@ import '../../Widgets/CustomButton.dart';
 import '../../Widgets/CustomTextInput.dart';
 import '../../Widgets/Drawer.dart';
 
-class AddProject extends StatefulWidget {
-  const AddProject({super.key});
+class EmployeeAddProject extends StatefulWidget {
+  const EmployeeAddProject({super.key});
 
   @override
-  State<AddProject> createState() => _AddProjectState();
+  State<EmployeeAddProject> createState() => _EmployeeAddProjectState();
 }
 
-class _AddProjectState extends State<AddProject> {
+class _EmployeeAddProjectState extends State<EmployeeAddProject> {
   TextEditingController projectTitle = TextEditingController();
   TextEditingController authorName = TextEditingController();
   TextEditingController projectDescription = TextEditingController();
@@ -38,6 +40,7 @@ class _AddProjectState extends State<AddProject> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
 
@@ -45,22 +48,22 @@ class _AddProjectState extends State<AddProject> {
 
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(65.0), // Adjust the height as needed
-        child: CustomAppBar(),
+        child: EmployeeCustomAppBar(),
       ),
-      drawer: MyDrawer(),
+      drawer: MyEmployeeDrawer(),
       body: SingleChildScrollView(
         child: LayoutBuilder(
             builder: (context, constraints) {
               // Calculate a responsive factor based on screen width
               double responsiveFactor = constraints.maxWidth / 600.0;
-        
+
               // Define the base icon size
               double baseIconSize = 15.0;
               double basedropdownSize = 200.0;
               // Calculate the responsive icon size
               double responsiveIconSize = baseIconSize * responsiveFactor;
               double responsivedropdownSize = basedropdownSize * responsiveFactor;
-        
+
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -81,19 +84,19 @@ class _AddProjectState extends State<AddProject> {
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
                             child: CustomTextInput(maxLines: 1,textController: projectTitle, hintText: "Project Title",onsecuretext: false,readOnly: false,onChanged: (){
-        
+
                             },)),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
                             child: CustomTextInput(maxLines: 1,textController: authorName, hintText: "Author Name",onsecuretext: false,readOnly: false,onChanged: (){
-        
+
                             },)),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
                             child: CustomTextInput(maxLines: 4,textController:projectDescription , hintText: "Project Description",onsecuretext: false,readOnly: false,onChanged: (){
-        
+
                             },)),
                       ],
                     ),
@@ -101,25 +104,19 @@ class _AddProjectState extends State<AddProject> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Date"),
-                            SizedBox(height: 30,),
-                            Container(
-                                width: responsivedropdownSize,
-                                padding: EdgeInsets.only(left: 30),
-                                child:  ElevatedButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: Text("Date"),
-                                ),),
-                          ],
-                        ),
+
+                        Container(
+                          width: responsivedropdownSize,
+                          padding: EdgeInsets.only(left: 30),
+                          child:  ElevatedButton(
+                            onPressed: () => _selectDate(context),
+                            child: Text("Date"),
+                          ),),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
                             child: CustomTextInput(maxLines: 1,textController: projectId, hintText: "Project Id",onsecuretext: false,readOnly: false,onChanged: (){
-        
+
                             },)),
                         Container(
                             width: responsivedropdownSize,
@@ -132,17 +129,17 @@ class _AddProjectState extends State<AddProject> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         NeumorphicRoundedButton(buttonText: "Clear",textColor: Colors.white,borderRadius: 30,onTap: (){
-        
+
                         },),
                         SizedBox(width: 20,),
                         NeumorphicRoundedButton(buttonText: "ADD",textColor: Colors.white,borderRadius: 30,onTap: (){
-        AddProjectController.addProjectController(projectTitle.text, authorName.text, projectDescription.text, Date, projectId.text, context);
+                          AddProjectController.addProjectController(projectTitle.text, authorName.text, projectDescription.text, Date, projectId.text, context);
                         },),
                       ],
                     )
                   ],
                 ),
-        
+
               );
             }),
       ),

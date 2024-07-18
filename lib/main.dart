@@ -3,6 +3,7 @@ import 'dart:js_interop';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hiddenlampadmin/Dashboard/View/EmployeeDashboard.dart';
 import 'Auth/View/Login.dart';
 import 'Dashboard/View/Dashboard.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: _auth.currentUser != null ?Dashboard()  : Login(),
+      home: _auth.currentUser != null ? _auth.currentUser!.email == "hiddenlampemployee@gmail.com" ?EmployeeDashboard():Dashboard()  : Login(),
     );
   }
 }

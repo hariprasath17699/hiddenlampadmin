@@ -31,7 +31,14 @@ class _LoginState extends State<Login> {
 
 
       ),
-      body: Column(
+      body:  WillPopScope(
+    onWillPop: () async {
+    // You can add your custom logic here to determine whether
+    // to allow or restrict the back button press.
+    // Return true to allow, false to restrict.
+    return false;
+    },
+    child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -65,6 +72,6 @@ LoginController.Login(username.text,password.text,context);
                       },)))),
         ],
       )
-    );
+    ));
   }
 }

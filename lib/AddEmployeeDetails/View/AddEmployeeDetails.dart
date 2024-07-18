@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hiddenlampadmin/AddEmployeeDetails/Controller/AddEmployeeDetailsController.dart';
 import 'package:hiddenlampadmin/AddEmployeeDetails/UploadEmployeeImage.dart';
 import 'package:hiddenlampadmin/Widgets/CustomTextInput.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../Dashboard/View/Dashboard.dart';
 import '../../Widgets/Appbar.dart';

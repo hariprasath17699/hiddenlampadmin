@@ -1,73 +1,72 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:hiddenlampadmin/AddProject/Controller/AddProjectController.dart';
-import 'package:hiddenlampadmin/Widgets/projectUploadImage.dart';
-import '../../Dashboard/View/Dashboard.dart';
+import 'package:hiddenlampadmin/Add%20Assignment/View/Controller/AddAssignmentController.dart';
+import 'package:hiddenlampadmin/EmployeeAppBar.dart';
+import 'package:hiddenlampadmin/EmployeeDrawer.dart';
+import 'package:hiddenlampadmin/Widgets/CustomTextInput.dart';
+
 import '../../Widgets/Appbar.dart';
 import '../../Widgets/CustomButton.dart';
-import '../../Widgets/CustomTextInput.dart';
 import '../../Widgets/Drawer.dart';
 
-class AddProject extends StatefulWidget {
-  const AddProject({super.key});
+class EmployeeAddAssignment extends StatefulWidget {
+  const EmployeeAddAssignment({super.key});
 
   @override
-  State<AddProject> createState() => _AddProjectState();
+  State<EmployeeAddAssignment> createState() => _EmployeeAddAssignmentState();
 }
 
-class _AddProjectState extends State<AddProject> {
-  TextEditingController projectTitle = TextEditingController();
-  TextEditingController authorName = TextEditingController();
-  TextEditingController projectDescription = TextEditingController();
-  TextEditingController projectId = TextEditingController();
-  DateTime Date = DateTime.now();
+class _EmployeeAddAssignmentState extends State<EmployeeAddAssignment> {
+  TextEditingController assignmentName = TextEditingController();
+  TextEditingController assignmentId = TextEditingController();
+  TextEditingController Descreption = TextEditingController();
+  TextEditingController UploadURL = TextEditingController();
+  DateTime FromDate = DateTime.now();
+  DateTime ToDate = DateTime.now();
 
   var projectimage;
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context,DateTime initialDate) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: Date,
+      initialDate: initialDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
 
-    if (picked != null && picked != Date) {
+    if (picked != null && picked != initialDate) {
       setState(() {
-        Date = picked;
+        initialDate = picked;
       });
     }
   }
   @override
   Widget build(BuildContext context) {
-
     return  Scaffold(
 
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(65.0), // Adjust the height as needed
-        child: CustomAppBar(),
+        child: EmployeeCustomAppBar(),
       ),
-      drawer: MyDrawer(),
+      drawer: MyEmployeeDrawer(),
       body: SingleChildScrollView(
         child: LayoutBuilder(
             builder: (context, constraints) {
               // Calculate a responsive factor based on screen width
               double responsiveFactor = constraints.maxWidth / 600.0;
-        
+
               // Define the base icon size
               double baseIconSize = 15.0;
               double basedropdownSize = 200.0;
               // Calculate the responsive icon size
               double responsiveIconSize = baseIconSize * responsiveFactor;
               double responsivedropdownSize = basedropdownSize * responsiveFactor;
-        
+
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       padding: EdgeInsets.only(top: 100),
-                      child: Text("Add Project",style: TextStyle(
+                      child: Text("Add Assignment",style: TextStyle(
                         fontSize: responsiveIconSize,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
@@ -80,20 +79,20 @@ class _AddProjectState extends State<AddProject> {
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 1,textController: projectTitle, hintText: "Project Title",onsecuretext: false,readOnly: false,onChanged: (){
-        
+                            child: CustomTextInput(maxLines: 1,textController: assignmentName, hintText: "Assignment Name",onsecuretext: false,readOnly: false,onChanged: (){
+
                             },)),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 1,textController: authorName, hintText: "Author Name",onsecuretext: false,readOnly: false,onChanged: (){
-        
+                            child: CustomTextInput(maxLines: 1,textController: assignmentId, hintText: "Assignment Id",onsecuretext: false,readOnly: false,onChanged: (){
+
                             },)),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 4,textController:projectDescription , hintText: "Project Description",onsecuretext: false,readOnly: false,onChanged: (){
-        
+                            child: CustomTextInput(maxLines: 4,textController:Descreption , hintText: "Description",onsecuretext: false,readOnly: false,onChanged: (){
+
                             },)),
                       ],
                     ),
@@ -104,27 +103,43 @@ class _AddProjectState extends State<AddProject> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Date"),
+                            Text("From"),
                             SizedBox(height: 30,),
                             Container(
+                              width: responsivedropdownSize,
+                              padding: EdgeInsets.only(left: 30),
+                              child:  Container(
                                 width: responsivedropdownSize,
                                 padding: EdgeInsets.only(left: 30),
                                 child:  ElevatedButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: Text("Date"),
-                                ),),
+                                  onPressed: () => _selectDate(context,ToDate),
+                                  child: Text("${ToDate.day.toString()}/${ToDate.month.toString()}/${ToDate.year.toString()}"),
+                                ),),),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("To"),
+                            SizedBox(height: 30,),
+                            Container(
+                              width: responsivedropdownSize,
+                              padding: EdgeInsets.only(left: 30),
+                              child:  Container(
+                                width: responsivedropdownSize,
+                                padding: EdgeInsets.only(left: 30),
+                                child:  ElevatedButton(
+                                  onPressed: () => _selectDate(context,ToDate),
+                                  child: Text("${ToDate.day.toString()}/${ToDate.month.toString()}/${ToDate.year.toString()}"),
+                                ),),),
                           ],
                         ),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
-                            child: CustomTextInput(maxLines: 1,textController: projectId, hintText: "Project Id",onsecuretext: false,readOnly: false,onChanged: (){
-        
+                            child: CustomTextInput(maxLines: 1,textController:UploadURL , hintText: "Upload URL",onsecuretext: false,readOnly: false,onChanged: (){
+
                             },)),
-                        Container(
-                            width: responsivedropdownSize,
-                            padding: EdgeInsets.only(left: 30),
-                            child: IconButton(icon:Icon(Icons.image), onPressed: () {  projectimage = uploadprojectimagetofirebase.uploadImage(context,"projects");},)),
                       ],
                     ),
                     SizedBox(height: 100,),
@@ -132,21 +147,23 @@ class _AddProjectState extends State<AddProject> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         NeumorphicRoundedButton(buttonText: "Clear",textColor: Colors.white,borderRadius: 30,onTap: (){
-        
+                          assignmentName.clear();
+                          assignmentId.clear();
+                          Descreption.clear();
+                          UploadURL.clear();
                         },),
                         SizedBox(width: 20,),
                         NeumorphicRoundedButton(buttonText: "ADD",textColor: Colors.white,borderRadius: 30,onTap: (){
-        AddProjectController.addProjectController(projectTitle.text, authorName.text, projectDescription.text, Date, projectId.text, context);
+                          AddAssignmentController.addAssignment(assignmentName.text,UploadURL.text,Descreption.text,assignmentId.text,FromDate,ToDate,context);
                         },),
                       ],
                     )
                   ],
                 ),
-        
+
               );
             }),
       ),
     );
-
   }
 }

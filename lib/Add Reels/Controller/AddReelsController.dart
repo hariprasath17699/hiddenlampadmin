@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cross_file/src/types/interface.dart';
 import 'package:flutter/material.dart';
 import 'package:hiddenlampadmin/Constants/Constants.dart';
 

@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hiddenlampadmin/Add%20Reels/Controller/AddReelsController.dart';
 import 'package:hiddenlampadmin/Constants/Constants.dart';
 import 'package:hiddenlampadmin/Dashboard/View/Dashboard.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../Utils/matUtils.dart';
 import '../../Widgets/Appbar.dart';

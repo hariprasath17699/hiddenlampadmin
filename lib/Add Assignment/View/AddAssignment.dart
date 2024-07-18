@@ -108,16 +108,21 @@ class _AddAssignmentState extends State<AddAssignment> {
                                 onPressed: () => _selectDate(context,FromDate),
                                 child: Text("${FromDate.day.toString()}/${FromDate.month.toString()}/${FromDate.year.toString()}"),
                               ),),),
-                        Container(
-                            width: responsivedropdownSize,
-                            padding: EdgeInsets.only(left: 30),
-                            child:  Container(
-                              width: responsivedropdownSize,
-                              padding: EdgeInsets.only(left: 30),
-                              child:  ElevatedButton(
-                                onPressed: () => _selectDate(context,ToDate),
-                                child: Text("${ToDate.day.toString()}/${ToDate.month.toString()}/${ToDate.year.toString()}"),
-                              ),),),
+                        Column(
+                          children: [
+                            Text("From"),
+                            Container(
+                                width: responsivedropdownSize,
+                                padding: EdgeInsets.only(left: 30),
+                                child:  Container(
+                                  width: responsivedropdownSize,
+                                  padding: EdgeInsets.only(left: 30),
+                                  child:  ElevatedButton(
+                                    onPressed: () => _selectDate(context,ToDate),
+                                    child: Text("${ToDate.day.toString()}/${ToDate.month.toString()}/${ToDate.year.toString()}"),
+                                  ),),),
+                          ],
+                        ),
                         Container(
                             width: responsivedropdownSize,
                             padding: EdgeInsets.only(left: 30),
